@@ -29,7 +29,7 @@ Then, select **Raw data files**.
 
 Run an md5 check for data integrity during transfer, the md5 should also be provided to GEO.
 
-```
+```bash
 md5sum *.fastq.gz > md5.txt
 ```
 
@@ -50,24 +50,36 @@ Login to NCBI and GEO would then assign the path for data uploading in their **s
 Multiple options are available for dataset upload. Here, I recommend using SFTP for transferring data from local to another server.
 
 
-```
-sftp geoftp@host_address
-# entre your password
+```bash
+### In your local terminal, login to GEO FTP server
+sftp geoftp@host_address # host_address is in step2.
+# entre the password GEO provided
 
-mkdir upload/the_folder_name_GEO_proveid
+### Create your own floder that GEO provided
+mkdir upload/the_folder_name_GEO_provided
+
+### Create your a new folder for this submission
 mkdir geo_submmsion_Jan04
-cd upload/the_folder_name_GEO_proveid
+
+### Go to the GEO FTP server selected folder 
+cd upload/the_folder_name_GEO_proveid/geo_submmsion_Jan04
+
+### Go to the local folder that contain your data
 lcd ur_local_data_file
 
+### Copy the data and md5 to the GEO FTP server
 put *fastq.gz
 put md5.txt
+
+### Check tha md5
+md5sum -c md5.txt
 
 ```
 
 
 ### Step3: Fill out the Metadata form
 Download the latest Metadata form and complete all the required (labeled in **) cells. 
-An example form is downloaded on the date 2024.01.04.
+> An example form is downloaded on the date 2024.01.04.
 
 ![](https://github.com/beritlin/NGS_analyses/blob/main/Figure/GEO_10.png)
 ![](https://github.com/beritlin/NGS_analyses/blob/main/Figure/GEO_11.png)
